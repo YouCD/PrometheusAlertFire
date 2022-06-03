@@ -1,0 +1,30 @@
+Alert:
+  # 告警消息的标题
+  Title: "华北集群:"
+  # Prometheus外网连接
+  PrometheusUrl: "http://192.168.201.162:39000"
+  # 监听的端口默认8080
+  ListenPort: 8012
+  # 日志级别 info|debug
+  LogLevel: info
+  # 默认的通知方式 DingTalk | WorkWechat
+  DefaultNotify: WorkWechat
+  # 全局开关 false | true
+  Enabled: false
+# 企业微信 机器人配置
+WorkWechat:
+  Key: 9c52045d-e4be-486r-9233-6f3f10883688
+# 钉钉机器人配置
+DingTalk:
+  Sign: SEC6556febd1d0ff5f07c902fa49c603ce8291f9bfd75b14fbc46f977de35b942
+  Token: 1d8289d151ffe4de8908be2b9e7695b21eccdd3610968707f01a129bbc6f2133
+# 数据库配置
+MySQL:
+  HostAndPort: 127.0.0.1
+  DBName: PrometheusAlertFire
+  Password: P@ssw0rd
+  User: root
+Silences:
+  # 静默期时间范围
+  TimeArray: "20:34~21:30"
+  Enabled: true
