@@ -1,7 +1,6 @@
 .idea
 bin
 .DS_Store
-movie.db
-!dist/dist.go
-dist/
 config.yaml
+dist/*
+!dist/dist.go
