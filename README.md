@@ -12,6 +12,9 @@
 * 支持钉钉、企微机器人
 * 支持静默时间段（只会发送已订阅的消息）
 
+## 架构图
+[![](./image/架构图.png)
+
 ## 未来
 * 集成阿里云电话
 * 可发送多个通知渠道，不同的`接收者`可添加自己的通知渠道，如：钉钉，微信
@@ -19,12 +22,43 @@
 
 ## 部署
 目前只提供二进制的方式,在[relases](https://github.com/YouCD/PrometheusAlertFire/releases)页面下载
+1. 添加至 `prometheus alertmanager`
+这是`prometheus alertmanager`配置案例
 
-1. 创建数据库
+```yaml
+cat alertmanager.yaml 
+global:
+  resolve_timeout: 5m
+route:
+  receiver: default
+  group_by:
+  - alertname
+  routes:
+  - receiver: default
+    matchers:
+    - alertname =~ "InfoInhibitor|Watchdog"
+  group_wait: 30s
+  group_interval: 10s
+  repeat_interval: 10s
+receivers:
+- name: default
+  webhook_configs:
+  - send_resolved: true
+    http_config:
+      follow_redirects: true
+    # 这里填写 PrometheusAlertFire 的地址，url必须为 `/api/alert`
+    url: http://192.168.200.1:8012/api/alert
+    max_alerts: 0
+templates:
+- /etc/alertmanager/config/*.tmpl
+
+```
+
+3. 创建数据库
 ```SQL
 create database PrometheusAlertFire charset utf8mb;
 ```
-2. 修改相关的参数
+3. 修改相关的参数
 ```yaml
 Alert:
   # 告警消息的标题
@@ -58,7 +92,7 @@ Silences:
   Enabled: true
 
 ```
-3. 运行
+4. 运行
 ```shell
 ./PrometheusAlertFire
 ```

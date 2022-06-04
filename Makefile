@@ -10,7 +10,7 @@ build-darwin:
 	@CGO_ENABLED=0 GOOS=darwin GOARCH=amd64  go build -o $(BINARY_DIR)/$(BINARY_NAME)-darwin-amd64/$(BINARY_NAME)
 # windows
 build-win:
-	@CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o $(BINARY_DIR)/$(BINARY_NAME)-windows-amd64/$(BINARY_NAME)
+	@CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o $(BINARY_DIR)/$(BINARY_NAME)-windows-amd64/$(BINARY_NAME).exe
 # linux
 build-linux:
 	@CGO_ENABLED=0 GOOS=linux GOARCH=amd64   go build -o $(BINARY_DIR)/$(BINARY_NAME)-linux-amd64/$(BINARY_NAME)
